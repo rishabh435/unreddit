@@ -1,0 +1,6 @@
+<div class="panel panel-default">
+	<div class="panel-body">
+		<p><em> You subscribed to: </em>
+		<%=link_to(item.subreddit.title,subreddit_path(item.subreddit))%> <em><%= time_ago_in_words(item.created_at)%> ago</em></p>
+	</div>
+</div>

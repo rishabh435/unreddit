@@ -1,0 +1,11 @@
+<div class="form-outer">
+<h1>Login</h1>
+
+<%= form_for :user, url: '/login', class: "form-group" do |f| %>
+
+  Email: <%= f.text_field :email, class: "form-control" %>
+  Password: <%= f.password_field :password, class: "form-control" %><br>
+  <%= f.submit "Login", class: "btn btn-default" %>
+
+<% end %>
+</div>

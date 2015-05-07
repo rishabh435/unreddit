@@ -1,0 +1,35 @@
+
+<div class="col-md-10 col-sm-10 col-xs-12">
+	<% @posts.each_with_index do |post,index| %>
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<div class="row">
+				<div id="<%=post.id%>" class="tar col-md-2 col-sm-2 col-xs-2 text-center">
+					<p class="vote_value">
+						<%=@vote_count_arr[index] %>
+					</p><% if session[:user_id] %>
+					<p>
+						<%= link_to(raw("<span class='glyphicon glyphicon-arrow-up icon'></span>"),post_votes_path, :remote => true, :class => 'post_vote_up '+vote_state(find_post_vote_val(post.id, current_user.id))["up"])%> <%= link_to(raw("<span class='glyphicon glyphicon-arrow-down icon'></span>"),post_votes_path, :remote => true, :class => 'post_vote_down '+vote_state(find_post_vote_val(post.id, current_user.id))["down"])%>
+					</p><% end %>
+				</div>
+				<div class="col-md-2 col-sm-2 col-xs-2">
+					<% if post.link %>
+						<% if post.link =~ /^https?:\/\/(?:[a-z\-]+\.)+[a-z]{2,6}(?:\/[^\/#?]+)+\.(?:jpg|gif|png)$/ %>
+							<%= image_tag post.link, size:"90x90"%>
+						<% else %>
+							<%= image_tag get_image(post.link), size: "90x90" %>
+						<% end %>
+					<% elsif post.content %>
+						<%= image_tag "http://placehold.it/90x90", size: "90x90" %>
+					<% end %>
+				</div>
+				<div class="col-md-8 col-sm-8 col-xs-8">
+					<h3>
+						<% if post.content  %> <%= link_to post.title, post_path(post) %> <% elsif post.link  %> <%= link_to post.title, post.link %> <em><%=link_to "view comments", post_path(post, :more_params => "link") %></em> <% end %>
+					</h3><span class="grey_text"><em>Submitted at</em> <%= time_ago_in_words(post.created_at)%> <em>by</em> <%=post.user.name%></span>
+				</div>
+			</div><!-- row end -->
+		</div><!-- panel body end -->
+	</div><!-- panel end -->
+	<% end  %>
+</div><!-- col ends -->

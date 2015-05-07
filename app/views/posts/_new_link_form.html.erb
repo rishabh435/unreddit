@@ -1,0 +1,13 @@
+<h1>Add a new link</h1>
+<%=form_for :post, url: user_posts_path(current_user), class: 'form-group' do |f| %>
+	<%=f.label :title %>
+	<%=f.text_field :title, class: 'form-control title_field' %><span id="characterLeftTitle" style="float: right;"></span><br>
+
+	<%=f.label :link  %>
+	<%=f.url_field :link, class: 'form-control content_field' %><br>
+
+	<%=f.label :subreddit  %>
+	<%=f.autocomplete_field :subreddit_title, autocomplete_subreddit_title_posts_path, class: 'form-control subreddit_field'%><br>
+
+	<%=f.submit 'Post', :class => 'btn btn-default new-post'  %>
+<% end %>

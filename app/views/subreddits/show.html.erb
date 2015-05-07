@@ -1,0 +1,14 @@
+<html>
+	<head>
+		<title></title>
+	</head>
+	<body>
+		<h1>
+			<%=@subreddit.title.capitalize%> Posts
+		</h1>
+		<div class="row">
+			<%= render 'post_body'  %>
+			<%= render 'sidebar' %>
+		</div><!-- row ends -->
+	</body>
+</html>

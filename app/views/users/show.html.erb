@@ -1,0 +1,42 @@
+
+
+<div class="row" style="padding-top: 20px">
+	<div class="col-md-4">
+		<h2>
+		Hi, <%= current_user.name  %>!
+		</h2>
+		<p>
+			Link Karma: <span class="badge"><%= get_user_link_count(current_user.id)  %></span>
+		</p>
+		<p>
+			Post Karma: <span class="badge"><%= get_user_post_count(current_user.id)  %></span>
+		</p>
+		<p>
+			Comment Karma: <span class="badge"><%= get_user_comment_count(current_user.id)  %></span>
+		</p>
+	</div>
+	<div class="col-md-4">
+		<p>
+			<em>You Have Subscribed to</em><br>
+			<% subscriber_list = Subscriber.where(user_id: current_user.id) %>
+			<% subscriber_list.each do |item| %>
+				<%= link_to(Subreddit.find(item.subreddit_id).title, subreddit_path(Subreddit.find(item.subreddit.id))) %>
+
+			<% end%>
+
+		</p>
+	</div>
+</div>
+<div class="panel panel-default">
+	<div class="panel-body">
+		<h2>
+			Your Activity Feed
+		</h2><% if @activity_feed != [] %><% @activity_feed.reverse! %><% @activity_feed.each do |item| %><% if item.model_name.human == "Subscriber" %><%= render 'subscriber', item: item %><% elsif item.model_name.human == "Post"%><%= render 'post', item: item %><% elsif item.model_name.human == "Comment" %><%= render 'comment', item: item %><% end %><% end %><% else %>
+		<h1>
+			Just Joined!
+		</h1><% p "hello" %>
+		<p>
+			Go To <a href="/">Home</a> To Start
+		</p><% end %>
+	</div>
+</div>

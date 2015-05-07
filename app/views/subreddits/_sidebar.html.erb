@@ -1,0 +1,9 @@
+<div class="col-md-2 col-sm-2 col-xs-12 text-center">
+	<%= link_to 'New Post', new_user_post_path(current_user), :class => 'btn btn-default btn-full'  if current_user  %><% if Subscriber.exists?(user_id: session[:user_id], subreddit_id: @subreddit.id) %><% sub_check = '' %><% link_val = 'Unsubscribe' %><% else %><% link_val = 'Subscribe' %><% sub_check = 'in-active' %><% end %>
+	<div id="<%= @subreddit.id %>">
+		<br>
+		<span>subscribers</span> <span class="subscriber_count badge"><%=@subscriber_count%></span><br>
+		<br>
+		<%= link_to(link_val, subscribers_path,:remote => true, :class => 'btn btn-sm btn-default subscribed '+sub_check ) if current_user%>
+	</div>
+</div><!-- col ends -->

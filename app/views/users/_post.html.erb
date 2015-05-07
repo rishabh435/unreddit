@@ -1,0 +1,22 @@
+<div class="panel panel-default">
+	<div class="panel-body">
+		<div class="row">
+			<div id="<%=item.id%>" class="tar col-md-2 col-sm-2 col-xs-2 text-center">
+				<p class="vote_value">
+					<%=PostVote.where(post_id: item.id).sum(:vote_val) %>
+				</p><% if session[:user_id] %>
+				<p>
+					<%= link_to(raw("<span class='glyphicon glyphicon-arrow-up icon'></span>"),post_votes_path, :remote => true, :class => 'post_vote_up '+vote_state(find_post_vote_val(item.id, current_user.id))["up"])%> <%= link_to(raw("<span class='glyphicon glyphicon-arrow-down icon'></span>"),post_votes_path, :remote => true, :class => 'post_vote_down '+vote_state(find_post_vote_val(item.id, current_user.id))["down"])%>
+				</p><% end %>
+			</div>
+			<div class="col-md-2 col-sm-2 col-xs-2">
+				<% if item.link %><% if item.link =~ /^https?:\/\/(?:[a-z\-]+\.)+[a-z]{2,6}(?:\/[^\/#?]+)+\.(?:jpg|gif|png)$/ %><%= image_tag item.link, size:"90x90"%><% else %><%= image_tag get_image(item.link), size: "90x90" %><% end %><% elsif item.content %><%= image_tag "http://placehold.it/90x90", size: "90x90" %><% end %>
+			</div>
+			<div class="col-md-8 col-sm-8 col-xs-8">
+				<h3>
+					<% if item.content  %> <%= link_to item.title, post_path(item) %> <% elsif item.link  %> <%= link_to item.title, item.link %> <em><%=link_to "view comments", post_path(item, :more_params => "link") %></em> <% end %>
+				</h3><span style=""><em>Submitted</em> <%= time_ago_in_words(item.created_at)%> <em>ago by</em> <%=item.user.name%> <em>to</em> <%=link_to(item.subreddit.title,subreddit_path(item.subreddit))%></span>
+			</div>
+		</div>
+	</div>
+</div>

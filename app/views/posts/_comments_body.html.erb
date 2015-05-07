@@ -1,0 +1,32 @@
+<div class="col-md-12">
+	<h3>
+		Add a comment
+	</h3>	
+	<%= form_for :comments, url: post_comments_path(@post), :class => 'form-group' do |f| %>
+
+		<%= f.text_area :content, size: "2x2", :class => 'form-control' %><br>
+		<%= f.submit 'Comment', :class => 'btn btn-default'  %> <br>
+
+	<% end%>
+	<% @vote_count_arr.reverse! %> <% @post.comments.reverse.each_with_index do |comment,index| %>
+		<div class="well rm-pad">
+			<div class="row">
+				<div id="<%=comment.id%>" class="tar col-md-2 col-sm-4 col-xs-4 text-center">
+					<p class="vote_value">
+						<%=@vote_count_arr[index] %>
+					</p>
+					<% if current_user %>
+					<p>
+						<%= link_to(raw("<span class='glyphicon glyphicon-arrow-up icon_comment'></span>"),comment_votes_path, :remote => true, :class => 'comment_vote_up '+vote_state(find_comment_vote_val(comment.id, current_user.id))["up"])%> <%= link_to(raw("<span class='glyphicon glyphicon-arrow-down icon_comment'></span>"),comment_votes_path, :remote => true, :class => 'comment_vote_down '+vote_state(find_comment_vote_val(comment.id, current_user.id))["down"])%>
+					</p>
+					<% end %>
+				</div>
+				<div class="col-md-10 col-sm-6 col-xs-8">
+					<h4>
+						<%=comment.user.name  %> <em>said</em>: <%=  comment.content %>
+					</h4><span style=""><em><%= time_ago_in_words(comment.created_at)%> ago</em></span><br>
+				</div>
+			</div>
+		</div>
+	<% end %>
+</div>

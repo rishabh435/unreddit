@@ -1,0 +1,46 @@
+    <div id="<%=@post.id%>" class="tar col-md-2 col-sm-2 col-xs-2 text-center" >
+
+			<p class="vote_value"> <%=@vote_count_post %><p>
+			<% if current_user %>
+				<p>
+					<%= link_to(raw("<span class='glyphicon glyphicon-arrow-up icon'></span>"),post_votes_path, :remote => true, :class => 'post_vote_up '+vote_state(@vote_val)["up"])%>
+					<%= link_to(raw("<span class='glyphicon glyphicon-arrow-down icon'></span>"),post_votes_path, :remote => true, :class => 'post_vote_down '+vote_state(@vote_val)["down"])%>
+				</p>
+			<% end %>
+		</div>
+	<div class="col-md-2 col-sm-2 col-xs-2">
+		<% if @post.link %>
+			<% if @post.link =~ /^https?:\/\/(?:[a-z\-]+\.)+[a-z]{2,6}(?:\/[^\/#?]+)+\.(?:jpg|gif|png)$/ %>
+				<%= image_tag @post.link, size:"90x90"%>
+			<% else %>
+				<%= image_tag get_image(@post.link), size: "90x90" %>
+			<% end %>
+		<% elsif @post.content %>
+			<%= image_tag "http://placehold.it/90x90", size: "90x90" %>
+		<% end %>
+	</div>
+	<div class="col-md-8 col-sm-8 col-xs-8">
+		<% if @post.content %>
+			<h3><%= @post.title %></h3>
+			<p><%=@post.content  %></p>
+		<% elsif @post.link  %>
+			<h3><%= link_to(@post.title,@post.link) %></h3>
+		<% end %>
+
+
+<% if session[:user_id] == @post.user_id %>
+
+	<%= form_for([@post], class: 'form-group') do |f| %>
+		<% if @post.content %>
+			<%= f.text_area :content, class: 'form-control' %>
+		<% elsif @post.link %>
+			<%= f.url_field :link, class: 'form-control' %>
+		<% end %>
+		<br><br>
+
+		<%= f.submit "Update", class: "btn btn-default" %>
+	<% end%>
+	<br>
+	<%=link_to("Delete", post_path, method: :delete, class: "btn btn-default" ) %>
+<% end %>
+	</div>

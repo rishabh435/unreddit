@@ -1,0 +1,5 @@
+<h2> Subreddits </h2>
+
+<% @subreddits.each do |subreddit| %>
+	<%= link_to(subreddit.title,subreddit_path(subreddit)) %> <br>
+<% end %>

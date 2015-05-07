@@ -1,0 +1,13 @@
+<div class="row" style="padding-top: 20px">
+	<div class="col-md-12">
+		<div class="dropdown">
+			<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">My Subreddits</button>
+			<ul class="dropdown-menu" role="menu">
+				<% current_user.subreddits.each do |subreddit| %>
+				<li role="presentation">
+					<%=link_to subreddit.title, subreddit_path(subreddit)  %>
+				</li><% end %>
+			</ul>
+		</div>
+	</div>
+</div>

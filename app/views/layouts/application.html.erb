@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Unreddit</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <script>
+  var current_user_id = <%= session[:user_id]  %>;
+  console.log(current_user_id);
+  </script>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<link href='//fonts.googleapis.com/css?family=Roboto:500,900italic,900,400italic,100,700italic,300,700,500italic,100italic,300italic,400' rel='stylesheet' type='text/css'>
+
+<!-- Optional theme -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+ -->
+
+
+</head>
+<body>
+
+
+
+
+<!-- -------- NAVBAR---------- -->
+
+<nav class="navbar navbar-default">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button> -->
+      <a class="navbar-brand" href="/">Unreddit</a>
+    </div>
+
+
+      <ul class="nav navbar-nav navbar-right">
+      
+      <% if current_user %>
+
+        <li><%= link_to "Hello, "+current_user.name, '/profile' %></li>
+        <li><%= link_to "Logout", '/logout' , :class => 'btn btn-default btn-sm' %></li>
+
+      <% else %>
+
+        <li><%= link_to 'Login', '/login' , :class => 'btn btn-default' %></li> 
+        <li><%= link_to 'Signup', '/signup' , :class => 'btn btn-default' %></li>
+      
+      <% end %>
+
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+
+<div class="container">
+  <% flash.each do |key, value| %>
+        <div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <%= value %></div>
+      <% end %>
+
+<%= yield %>
+
+<!-- <%= debug(params) if Rails.env.development? %> -->
+</div>
+<!-- Latest compiled and minified JavaScript -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+</body>
+</html>

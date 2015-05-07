@@ -1,0 +1,13 @@
+	<% if @search == true %>
+	<h3>Your Search Results</h3>
+	<br>
+	<% p @post %>
+	<% if @post == nil %>
+	<br>
+	<h2>Sorry Nothing Found !!</h2>
+	<% end %>
+	<% end %>
+<div class="row">
+
+	<%= render 'posts_body'  %>	
+</div>

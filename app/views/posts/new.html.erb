@@ -1,0 +1,18 @@
+<div class="form-outer">
+	<% if @link_flag%>
+		<%= render 'new_link_form' %>
+	<% else %>
+		<%= render 'new_post_form' %>
+	<% end %>
+<br>
+<p>
+	<em>You Have Subscribed to</em><br>
+	<% subscriber_list = Subscriber.where(user_id: current_user.id) %>
+	<% subscriber_list.each do |item| %>
+	<%= link_to(Subreddit.find(item.subreddit_id).title, subreddit_path(Subreddit.find(item.subreddit.id))) %>
+
+<% end%>
+
+</p>
+</div>
+

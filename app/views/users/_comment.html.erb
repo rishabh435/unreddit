@@ -1,0 +1,20 @@
+
+<div class="panel panel-default">
+	<div class="panel-body">
+		<div class="row">
+			<div id="<%=item.id%>" class="tar col-md-2 col-sm-4 col-xs-4 text-center">
+				<p class="vote_value">
+					<%=CommentVote.where(comment_id: item.id).sum(:vote_val) %>
+				</p><% if session[:user_id] %>
+				<p>
+					<%= link_to(raw("<span class='glyphicon glyphicon-arrow-up icon_comment'></span>"),comment_votes_path, :remote => true, :class => 'comment_vote_up '+vote_state(find_comment_vote_val(item.id, current_user.id))["up"])%> <%= link_to(raw("<span class='glyphicon glyphicon-arrow-down icon_comment'></span>"),comment_votes_path, :remote => true, :class => 'comment_vote_down '+vote_state(find_comment_vote_val(item.id, current_user.id))["down"])%>
+				</p><% end %>
+			</div>
+			<div class="col-md-10 col-sm-6 col-xs-8">
+				<h4>
+					You said: <%= item.content %><br>
+				</h4><span style=""><em><%= time_ago_in_words(item.created_at)%> ago</em></span><br>
+			</div>
+		</div>
+	</div>
+</div>

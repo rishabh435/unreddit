@@ -1,0 +1,146 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require jquery-ui
+ *= require_self
+ */
+
+body {
+
+	font-family: 'Roboto' !important;
+}
+
+h1,h2,h3,h4,h5 {
+
+	font-weight: 300 !important;
+    word-wrap: break-word;
+}
+
+p {
+
+	font-weight: 400 !important;
+}
+
+.post_vote_up, .comment_vote_up{
+	padding-left:5px; 
+	padding-right: 5px; 
+	color: rgb(23, 223, 23) !important;
+	
+}
+
+.post_vote_down, .comment_vote_down{
+	padding-left:5px; 
+	padding-right: 5px; 
+	color: red !important;
+	
+}
+
+.subscribed
+{
+	padding-left:5px; 
+	padding-right: 5px; 
+	color: green !important;
+
+}
+
+
+.in-active
+{
+	
+	color: #444 !important;
+}
+
+.navbar-brand
+ {
+ 	font-size: 30px;
+	font-weight: 500;
+	font-family: 'Marck Script', cursive;
+}
+
+.navbar {
+	border-radius: 0px;
+}
+
+.navbar-default {
+  background-color: #D7EDFF;
+}
+
+.icon{
+
+	padding-left: 5px;
+	padding-right: 5px;
+	font-size: 20px;
+}
+.back-color{
+
+	background-color: #f7f7f7;
+}
+
+.vote_value {
+font-size: 20px;
+padding-top: 10px;
+
+}
+
+.grey_text {
+
+	color: #aaa;
+}
+
+.btn-full {
+
+	width: 100%;
+}
+
+
+.icon_comment{
+
+	padding-left: 2px;
+	padding-right: 2px;
+	font-size: 10px;
+}
+
+.vote_value_comment {
+font-size: 15px;
+padding-top: 5px;
+
+}
+.rm-pad {
+
+	padding: 0 !important;
+}
+
+.form-outer
+{
+	max-width: 600px ;
+	margin: 0 auto;
+}
+.form-inline {
+	padding-top:20px;
+}
+
+.span-small-text {
+
+	padding-left: 10px;
+	font-size: 16px;
+}
+
+.thumb-image {
+border-radius: 3px;
+box-shadow: 1px 1px 3px 1px #eee;
+	}
+
+h3 {
+
+	margin-top: 5px !important;
+}
