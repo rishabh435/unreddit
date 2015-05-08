@@ -3,6 +3,7 @@ class PostsController < ApplicationController
   before_filter :authorize
   
   def index
+    
     if params[:search]
       @search = true
       @posts = Post.search(params[:search]).order("created_at DESC")

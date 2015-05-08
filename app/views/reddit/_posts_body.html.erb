@@ -1,4 +1,9 @@
 <div class="col-sm-8 col-sm-pull-4">
+<div class="sort-links">
+Sort By: 
+<%= sortable "title" %>
+<%= sortable "created_at", "Date" %>
+</div>
 	<% @posts.each_with_index do |post,index| %>
 		<div class="panel panel-default">
 			<div class="panel-body">
@@ -39,4 +44,7 @@
 			</div>
 		</div>
 	<% end  %>
+	<div class="row text-center"> 
+		<%= will_paginate @posts  %>				
+	</div>
 </div>
